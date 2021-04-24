@@ -1,7 +1,13 @@
 a{
   color:#fff;
+  margin-left: 10px;
 }
 
 a:hover{
   color:darkgrey;
+}
+
+button {
+  background-color: lightgrey;
+  
 }
