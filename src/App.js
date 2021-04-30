@@ -18,7 +18,6 @@ class App extends React.Component {
     const { isAuthenticated } = this.props.auth0;
     return (
     <>
-      <Login />
       <Router>
         <IsLoadingAndError>
           <Header />
@@ -26,7 +25,7 @@ class App extends React.Component {
             <Route exact path="/">
               {isAuthenticated ? <MyFavoriteBooks /> : <Login />}
             </Route>
-            <Route exact path="/Profile">
+            <Route exact path="/profile">
               <Profile />
             </Route>
           </Switch>
