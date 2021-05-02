@@ -6,6 +6,7 @@ import Login from './Login';
 // import MyFavoriteBooks from './MyFavoriteBooks';
 import BestBook from './BestBook';
 import Profile from './Profile';
+import BookFormModal from './BookFormModal'
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   BrowserRouter as Router,
@@ -30,14 +31,13 @@ class App extends React.Component {
             <Route exact path="/profile">
              <Profile />
             </Route>
+            <Route exact path="/books">
+            <BookFormModal />
+            </Route>
           </Switch>
           <Footer />
         </IsLoadingAndError>
       </Router>
-      {/* <form onSubmit={this.handleFormSubmit}>
-        <input type="text" onInput={this.handleEmailInput} />
-        <input type="submit" />
-      </form> */}
     </>
     );
   }

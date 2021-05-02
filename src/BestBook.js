@@ -2,12 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import Carousel from 'react-bootstrap/Carousel';
+import BookFormModal from './BookFormModal';
 
 class BestBook extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { books: [] };
+    this.state = { 
+      books: [] 
+    };
   }
+
+
+
 
   componentDidMount = async () => {
     try {
@@ -44,6 +50,7 @@ class BestBook extends React.Component {
             )}
           </Carousel>
         }
+        <BookFormModal />
       </>
     )
   }
