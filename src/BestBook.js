@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
 import BookFormModal from './BookFormModal';
 
 class BestBook extends React.Component {
@@ -9,7 +10,7 @@ class BestBook extends React.Component {
     super(props)
     this.state = { 
       books: [],
-      modalSeen: false
+      modalSeen: false,
     };
   }
 
@@ -36,9 +37,8 @@ class BestBook extends React.Component {
     }
   };
 
-  //function to add new book
-  addingBooksHandler = () => {
-
+  addBook = () => {
+    
   }
   
   render() {
@@ -61,7 +61,8 @@ class BestBook extends React.Component {
             )}
           </Carousel>
         }
-        <BookFormModal show={this.state.modalSeen} close={this.hideModal}/>
+        <Button variant='dark' onClick={this.showModal}>Add Your Book</Button>
+        <BookFormModal modalSeen={this.state.modalSeen} show={this.showModal} close={this.hideModal}/>
       </>
     )
   }
