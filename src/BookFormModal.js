@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
@@ -20,35 +21,42 @@ class BookFormModal extends React.Component {
   handleBookDescriptionSubmit = (e) => {
     this.setState({ description: e.target.value })
   }
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    
+  }
   render() {
     return (
-      <Modal show={true}>
+      <Modal show={this.props.show} onHide={this.props.hideModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Books!</Modal.Title>
+          <Modal.Title>Add a book to your collection</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Which book would you like to add?</p>
+          {/* <p>Add a book to your collection</p> */}
           <Form>
             <Form.Group controlId="bookName">
-              <Form.Label>Book Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter your desired book name." onInput={this.handleBookNameSubmit} />
+              <Form.Label>Title</Form.Label>
+              <Form.Control type="text" placeholder="enter the title here" onInput={this.handleBookNameSubmit} />
               <br />
-              <Form.Label>Book Status</Form.Label>
+              <Form.Label>Description</Form.Label>
+              <Form.Control type="text" placeholder="enter a brief synopsis here" onInput={this.handleBookStatusSubmit}>
+              </Form.Control>
+              <br />
+              <Form.Label>Status</Form.Label>
               <Form.Control as="select" onInput={this.handleBookDescriptionSubmit}>
+                <option> </option>
                 <option>Recommended</option>
                 <option>Not Recommened</option>
               </Form.Control>
               <br />
-              <Form.Label>Book Descrioption</Form.Label>
-              <Form.Control type="text" placeholder="Please input the desired book description." onInput={this.handleBookStatusSubmit}>
-              </Form.Control>
+              <Button variant="success" size="lg" onClick={this.props.open}>
+                Submit!
+              </Button>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" size="lg" onClick=" ** NEED TO FIND THE SUBMIT ACTION ** "active>
-            Submit!
-          </Button>
+        <Button variant="secondary" onClick={this.props.hideModal}>Close</Button>
         </Modal.Footer>
       </Modal >
     )
