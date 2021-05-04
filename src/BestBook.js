@@ -8,13 +8,20 @@ class BestBook extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      books: [] 
+      books: [],
+      modalSeen: false
     };
   }
 
+  // handle closing and showing modal
+  hideModal = () => {
+    this.setState({modalSeen: false});
+  }
+  showModal = () => {
+    this.setState({modalSeen: true});
+  }
 
-
-
+  //get books for given user email
   componentDidMount = async () => {
     try {
       const userBookData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/books`, { params: { email: this.props.auth0.user.email } });
@@ -29,7 +36,11 @@ class BestBook extends React.Component {
     }
   };
 
+  //function to add new book
+  addingBooksHandler = () => {
 
+  }
+  
   render() {
     return (
       <>
@@ -39,7 +50,7 @@ class BestBook extends React.Component {
               <Carousel.Item key={index}>
                 <img
                   src="https://picsum.photos/1250/400"
-                  alt="First slide"
+                  alt="pleasant placeholder pictures"
                 />
                 <Carousel.Caption>
                   <h3>{book.name}</h3>
@@ -50,7 +61,7 @@ class BestBook extends React.Component {
             )}
           </Carousel>
         }
-        <BookFormModal />
+        <BookFormModal show={this.state.modalSeen} close={this.hideModal}/>
       </>
     )
   }
