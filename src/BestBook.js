@@ -37,8 +37,11 @@ class BestBook extends React.Component {
     }
   };
 
-  addBook = () => {
-    
+  updateBooks = (bookResults) => {
+    this.setState ({
+      books:bookResults,
+    })
+    console.log('this is the updated state of books after POST:', this.state.books);
   }
   
   render() {
@@ -62,7 +65,7 @@ class BestBook extends React.Component {
           </Carousel>
         }
         <Button variant='dark' onClick={this.showModal}>Add Your Book</Button>
-        <BookFormModal modalSeen={this.state.modalSeen} show={this.showModal} close={this.hideModal}/>
+        <BookFormModal modalSeen={this.state.modalSeen} show={this.showModal} close={this.hideModal} updateBooks={this.updateBooks}/>
       </>
     )
   }

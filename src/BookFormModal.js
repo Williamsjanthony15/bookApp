@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { withAuth0 } from '@auth0/auth0-react';
-import IsLoadingAndError from './IsLoadingAndError';
 
 class BookFormModal extends React.Component {
   constructor(props) {
@@ -13,7 +12,6 @@ class BookFormModal extends React.Component {
       name: '',
       description: '',
       status: '',
-      err: false,
     };
   }
 
@@ -27,25 +25,21 @@ class BookFormModal extends React.Component {
     this.setState({ description: e.target.value })
   }
   handleFormSubmit = async() => {
-    try{
     const email = this.props.auth0.user.email;
 
-    axios.post(process.env.REACT_APP_BACKEND_URL+'/books',{
+    const bookResults = await axios.post(process.env.REACT_APP_BACKEND_URL+'/books',{
       email: email,
       name: this.state.name,
       description: this.state.description,
       status: this.state.status,
     })
-  } catch (error) {
-    this.setState ({
-      error:true,
-      errorMessage: error.message,
-    })
-  }
+    console.log(bookResults.data);
+    this.props.updateBooks(bookResults.data);
+    //TODO we need to call a function to close the modal after axios call
+    this.props.close();
   }
   render() {
     return (
-      // {this.state.error ? < IsLoadingAndError errorMessage={this.state.errorMessage} /> : ''}
       <Modal show={this.props.modalSeen} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>Add a book to your collection</Modal.Title>
@@ -69,7 +63,7 @@ class BookFormModal extends React.Component {
               </Form.Control>
               <br />
               <Button variant="success" size="lg" onClick={this.handleFormSubmit}>
-                Submit!
+                Add Your Book
               </Button>
             </Form.Group>
           </Form>
