@@ -35,7 +35,6 @@ class BookFormModal extends React.Component {
     })
     console.log(bookResults.data);
     this.props.updateBooks(bookResults.data);
-    //TODO we need to call a function to close the modal after axios call
     this.props.close();
   }
   render() {
